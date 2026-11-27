@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computers: Origin and Architecture — Multi-Page Academic Notes Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #F28C52;
+      --brand-hover: #E96B55;
+      --bg: #FBF9F7;
+      --card-bg: #FFFFFF;
+      --text: #2D2B28;
+      --border: #E8E4DC;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    header {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-breadcrumb {
+      font-size: 0.85rem;
+      color: #78716C;
+      margin-bottom: 0.25rem;
+    }
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin: 0;
+      color: #171717;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 0.5rem;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 2rem;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: #FAFAFA;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+    }
+    .main-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .page-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+    /* Prose Academic Styles matching Notes Guru */
+    .note-chapter h1, h1.chapter-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-top: 0.5rem;
+      margin-bottom: 0.85rem;
+      color: #171717;
+      letter-spacing: -0.02em;
+    }
+    .note-chapter h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      color: #1F1E1D;
+      border-left: 3.5px solid var(--brand);
+      padding-left: 0.75rem;
+    }
+    .ng-tag, .chapter-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.7rem;
+      margin-bottom: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 9999px;
+      background-color: #FFF7F0;
+      color: #E96B55;
+      border: 1px solid #FED7AA;
+    }
+    .ng-intro {
+      font-size: 1.025rem;
+      line-height: 1.8;
+      font-weight: 450;
+      color: #1F1E1D;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px dashed #E3DED5;
+    }
+    .ng-highlight, .callout-info {
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: 0.75rem;
+      background-color: #FFF8F3;
+      border: 1px solid #FBDCC9;
+      border-left: 4px solid var(--brand);
+      color: #3A2A20;
+      font-size: 0.925rem;
+    }
+    .ng-card {
+      padding: 1rem 1.25rem;
+      margin: 1.15rem 0;
+      border-radius: 0.75rem;
+      background-color: #FAF9F6;
+      border: 1px solid #E3DED5;
+    }
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.35rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="header-breadcrumb">IGNOU &bull; BCA &bull; BCS-011: Computer Basics and PC Software &bull; Block 1</div>
+      <h1 class="header-title">Unit 1: Computers: Origin and Architecture</h1>
+    </div>
+    <div>
+      <span class="ng-tag">4 Structured Pages</span>
+    </div>
+  </header>
+
+  <nav class="tabs-nav">
+    
+    <button class="tab-btn active" onclick="showPage(0)">
+      Page 1: Page 1: Introduction to ...
+    </button>
+    
+    <button class="tab-btn " onclick="showPage(1)">
+      Page 2: Page 2: Central Processi...
+    </button>
+    
+    <button class="tab-btn " onclick="showPage(2)">
+      Page 3: Page 3: Memory Hierarchy...
+    </button>
+    
+    <button class="tab-btn " onclick="showPage(3)">
+      Page 4: Page 4: Input-Output Sub...
+    </button>
+    
+  </nav>
+
+  <main class="main-container">
+    
+    <div id="page-wrapper-0" class="page-card" style="">
+      <div class="note-chapter">
+<span class="chapter-badge ng-tag">ACADEMIC FOUNDATION</span>
+<h1 class="chapter-title">Page 1: Introduction to Computer Systems and Functional Architecture</h1>
+<div class="note-section mb-6">
+<h2>Page 1: Introduction to Computer Systems and Functional Architecture</h2>
+<p>Loaded from existing processed database record.</p>
+</div>
+</div>
+    </div>
+    
+    <div id="page-wrapper-1" class="page-card" style="display:none;">
+      <div class="note-chapter">
+<span class="chapter-badge ng-tag">ACADEMIC FOUNDATION</span>
+<h1 class="chapter-title">Page 2: Central Processing Unit Architecture and Registers</h1>
+<div class="note-section mb-6">
+<h2>Page 2: Central Processing Unit Architecture and Registers</h2>
+<p>Loaded from existing processed database record.</p>
+</div>
+</div>
+    </div>
+    
+    <div id="page-wrapper-2" class="page-card" style="display:none;">
+      <div class="note-chapter">
+<span class="chapter-badge ng-tag">ACADEMIC FOUNDATION</span>
+<h1 class="chapter-title">Page 3: Memory Hierarchy and Cache Performance</h1>
+<div class="note-section mb-6">
+<h2>Page 3: Memory Hierarchy and Cache Performance</h2>
+<p>Loaded from existing processed database record.</p>
+</div>
+</div>
+    </div>
+    
+    <div id="page-wrapper-3" class="page-card" style="display:none;">
+      <div class="note-chapter">
+<span class="chapter-badge ng-tag">ACADEMIC FOUNDATION</span>
+<h1 class="chapter-title">Page 4: Input-Output Subsystems and High-Yield Examination Review</h1>
+<div class="note-section mb-6">
+<h2>Page 4: Input-Output Subsystems and High-Yield Examination Review</h2>
+<p>Loaded from existing processed database record.</p>
+</div>
+</div>
+    </div>
+    
+  </main>
+
+  <script>
+    function showPage(index) {
+      const cards = document.querySelectorAll('.page-card');
+      const tabs = document.querySelectorAll('.tab-btn');
+      cards.forEach((card, i) => {
+        card.style.display = (i === index) ? 'block' : 'none';
+      });
+      tabs.forEach((tab, i) => {
+        if (i === index) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

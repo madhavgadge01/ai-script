@@ -1,0 +1,20 @@
+# Environments
+.env
+.env.local
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Storage & SQLite
+storage/uninotes.db
+storage/raw_pdfs/*.pdf
+storage/checkpoints/*.json
+storage/exports/*.html
+
+# OS artifacts
+.DS_Store
+Thumbs.db

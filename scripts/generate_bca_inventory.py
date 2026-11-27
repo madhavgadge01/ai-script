@@ -1,0 +1,654 @@
+import json
+from pathlib import Path
+
+bca_curriculum = {
+    "programme": "BCA",
+    "programme_name": "Bachelor of Computer Applications",
+    "university": "IGNOU",
+    "total_semesters": 6,
+    "semesters": [
+        {
+            "semester_number": 1,
+            "title": "Semester 1",
+            "subjects": [
+                {
+                    "code": "BCS-011",
+                    "name": "Computer Basics and PC Software",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Basics of Computer Hardware",
+                            "units": [
+                                {"unit_number": 1, "title": "Computers: Their Origin and Applications", "topics": ["Von Neumann architecture", "Functional units", "CPU and registers", "Memory hierarchy", "I/O modes"]},
+                                {"unit_number": 2, "title": "Memory System", "topics": ["RAM, ROM, Cache", "Secondary storage devices", "Memory management concepts"]},
+                                {"unit_number": 3, "title": "Input / Output Devices", "topics": ["Keyboards, mice, scanners", "Printers, monitors, projectors", "Interfacing buses"]},
+                                {"unit_number": 4, "title": "Secondary Storage Devices", "topics": ["Hard disks, SSDs, optical storage", "RAID levels", "Storage interfaces"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Basics of Computer Software",
+                            "units": [
+                                {"unit_number": 1, "title": "Operating System Concepts", "topics": ["OS roles and types", "Process management", "Memory management", "File systems"]},
+                                {"unit_number": 2, "title": "System Software and Utilities", "topics": ["Compilers, interpreters, assemblers", "Device drivers", "System utilities"]},
+                                {"unit_number": 3, "title": "Application Software and Packages", "topics": ["Productivity software", "Word processing, spreadsheets, presentations", "Software evaluation"]}
+                            ]
+                        },
+                        {
+                            "block_number": 3,
+                            "title": "Internet Technologies",
+                            "units": [
+                                {"unit_number": 1, "title": "Introduction to Computer Networks", "topics": ["Network topologies", "LAN, MAN, WAN", "OSI and TCP/IP models"]},
+                                {"unit_number": 2, "title": "Internet and World Wide Web", "topics": ["IP addressing, DNS", "Browsers, HTTP, URL structures", "Internet search & services"]},
+                                {"unit_number": 3, "title": "Web Applications and Security", "topics": ["Client-server web architecture", "Web security fundamentals", "Malware, firewalls, and encryption"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCS-012",
+                    "name": "Basic Mathematics",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Algebra-I",
+                            "units": [
+                                {"unit_number": 1, "title": "Determinants", "topics": ["Properties of determinants", "Evaluation of determinants", "Cramer's rule"]},
+                                {"unit_number": 2, "title": "Matrices-I", "topics": ["Matrix types", "Matrix operations", "Transpose and symmetric matrices"]},
+                                {"unit_number": 3, "title": "Matrices-II", "topics": ["Inverse of a matrix", "Elementary row operations", "Systems of linear equations"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Algebra-II",
+                            "units": [
+                                {"unit_number": 1, "title": "Mathematical Induction", "topics": ["Principle of mathematical induction", "Proofs of identities and inequalities"]},
+                                {"unit_number": 2, "title": "Sequences and Series", "topics": ["Arithmetic progression (AP)", "Geometric progression (GP)", "Sum of n terms"]},
+                                {"unit_number": 3, "title": "Complex Numbers", "topics": ["Algebra of complex numbers", "Modulus and argument", "De Moivre's theorem"]}
+                            ]
+                        },
+                        {
+                            "block_number": 3,
+                            "title": "Calculus",
+                            "units": [
+                                {"unit_number": 1, "title": "Differential Calculus", "topics": ["Limits and continuity", "Derivatives of standard functions", "Chain rule"]},
+                                {"unit_number": 2, "title": "Applications of Derivatives", "topics": ["Rate of change", "Maxima and minima", "Tangents and normals"]},
+                                {"unit_number": 3, "title": "Integral Calculus", "topics": ["Indefinite integrals", "Integration by substitution and parts", "Definite integrals"]}
+                            ]
+                        },
+                        {
+                            "block_number": 4,
+                            "title": "Vectors and 3D Geometry",
+                            "units": [
+                                {"unit_number": 1, "title": "Vectors", "topics": ["Vector algebra", "Dot and cross products", "Scalar triple product"]},
+                                {"unit_number": 2, "title": "Three Dimensional Geometry", "topics": ["Direction cosines and ratios", "Equation of a line", "Equation of a plane"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "FEG-02",
+                    "name": "Foundation Course in English - 2",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Writing Skills-I",
+                            "units": [
+                                {"unit_number": 1, "title": "Sentence Structure and Grammar", "topics": ["Clause analysis", "Tenses and aspects", "Punctuation"]},
+                                {"unit_number": 2, "title": "Paragraph Development", "topics": ["Topic sentences", "Cohesion and coherence", "Types of paragraphs"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Writing Skills-II",
+                            "units": [
+                                {"unit_number": 1, "title": "Note-Taking and Summarizing", "topics": ["Extracting main ideas", "Condensation techniques", "Note-making formats"]},
+                                {"unit_number": 2, "title": "Composition and Essay Writing", "topics": ["Structure of an essay", "Argumentative essays", "Descriptive essays"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "ECO-01",
+                    "name": "Business Organisation",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Basic Concepts of Business",
+                            "units": [
+                                {"unit_number": 1, "title": "Nature and Scope of Business", "topics": ["Classification of business activities", "Objectives of business", "Social responsibility"]},
+                                {"unit_number": 2, "title": "Forms of Business Organisation", "topics": ["Sole proprietorship", "Partnership", "Joint stock company", "Cooperatives"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Business Enterprises and Trade",
+                            "units": [
+                                {"unit_number": 1, "title": "Financing of Business", "topics": ["Short-term and long-term finance", "Shares, debentures, retained earnings"]},
+                                {"unit_number": 2, "title": "Domestic and Foreign Trade", "topics": ["Wholesale and retail trade", "Export and import procedures"]}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "semester_number": 2,
+            "title": "Semester 2",
+            "subjects": [
+                {
+                    "code": "ECO-02",
+                    "name": "Accountancy-I",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Accounting Fundamentals",
+                            "units": [
+                                {"unit_number": 1, "title": "Introduction to Accounting", "topics": ["Accounting principles and conventions", "Double entry system"]},
+                                {"unit_number": 2, "title": "Journal and Ledger", "topics": ["Recording journal entries", "Posting to ledger accounts", "Balancing"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Trial Balance and Final Accounts",
+                            "units": [
+                                {"unit_number": 1, "title": "Trial Balance and Rectification of Errors", "topics": ["Preparation of trial balance", "Classification and rectification of errors"]},
+                                {"unit_number": 2, "title": "Final Accounts of Sole Proprietors", "topics": ["Trading account", "Profit and loss account", "Balance sheet with adjustments"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "MCS-011",
+                    "name": "Problem Solving and Programming",
+                    "type": "Theory",
+                    "credits": 3,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "An Introduction to C",
+                            "units": [
+                                {"unit_number": 1, "title": "Problem Solving Concepts", "topics": ["Algorithms, flowcharts, pseudo-code", "Top-down design"]},
+                                {"unit_number": 2, "title": "Basics of C", "topics": ["Data types, variables, constants", "Operators and expressions", "I/O functions"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Control Statements and Arrays",
+                            "units": [
+                                {"unit_number": 1, "title": "Decision and Loop Control Structures", "topics": ["if-else, switch-case", "while, do-while, for loops", "break and continue"]},
+                                {"unit_number": 2, "title": "Arrays and Strings", "topics": ["1D and 2D arrays", "String manipulation functions", "Character arrays"]}
+                            ]
+                        },
+                        {
+                            "block_number": 3,
+                            "title": "Functions, Pointers and Structures",
+                            "units": [
+                                {"unit_number": 1, "title": "Functions and Modular Programming", "topics": ["Function prototypes, parameters", "Call by value vs reference", "Recursion"]},
+                                {"unit_number": 2, "title": "Pointers and Memory Allocation", "topics": ["Pointer concepts, arithmetic", "Pointers and arrays", "malloc, calloc, free"]},
+                                {"unit_number": 3, "title": "Structures, Unions and File Handling", "topics": ["struct and union declarations", "Array of structures", "File operations in C"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "MCS-012",
+                    "name": "Computer Organization and Assembly Language Programming",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Digital Logic Circuits",
+                            "units": [
+                                {"unit_number": 1, "title": "Logic Gates and Boolean Algebra", "topics": ["Basic gates, universal gates", "Boolean minimization", "Karnaugh maps"]},
+                                {"unit_number": 2, "title": "Combinational and Sequential Circuits", "topics": ["Adders, multiplexers, decoders", "Flip-flops, counters, shift registers"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Basic Computer Organization and Microprocessors",
+                            "units": [
+                                {"unit_number": 1, "title": "Instruction Set Architecture", "topics": ["Instruction formats", "Addressing modes", "Instruction cycle"]},
+                                {"unit_number": 2, "title": "CPU Architecture and 8086 Microprocessor", "topics": ["ALU, CU, Register set", "8086 architecture", "Bus interface unit & execution unit"]}
+                            ]
+                        },
+                        {
+                            "block_number": 3,
+                            "title": "Assembly Language Programming",
+                            "units": [
+                                {"unit_number": 1, "title": "8086 Assembly Language Fundamentals", "topics": ["Data transfer instructions", "Arithmetic & logic instructions", "Branching & loops"]},
+                                {"unit_number": 2, "title": "Subroutines and Interrupts", "topics": ["Procedures and macros", "Software and hardware interrupts", "BIOS/DOS interrupts"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "MCS-013",
+                    "name": "Discrete Mathematics",
+                    "type": "Theory",
+                    "credits": 2,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Elementary Logic and Proofs",
+                            "units": [
+                                {"unit_number": 1, "title": "Propositional Logic", "topics": ["Truth tables", "Tautologies and contradictions", "Logical equivalences"]},
+                                {"unit_number": 2, "title": "Predicate Calculus and Proof Methods", "topics": ["Quantifiers (universal, existential)", "Direct, contradiction, and induction proofs"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Combinatorics and Graph Theory",
+                            "units": [
+                                {"unit_number": 1, "title": "Basic Combinatorics", "topics": ["Permutations and combinations", "Pigeonhole principle", "Inclusion-exclusion"]},
+                                {"unit_number": 2, "title": "Graph Theory Fundamentals", "topics": ["Graphs, paths, cycles", "Trees, spanning trees", "Eulerian and Hamiltonian graphs"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "MCS-015",
+                    "name": "Communication Skills",
+                    "type": "Theory",
+                    "credits": 2,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Professional Communication Fundamentals",
+                            "units": [
+                                {"unit_number": 1, "title": "Interpersonal Communication", "topics": ["Listening skills", "Non-verbal communication", "Overcoming communication barriers"]},
+                                {"unit_number": 2, "title": "Workplace Communication", "topics": ["Business emails, memos, circulars", "Interview preparation", "Group discussions"]}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "semester_number": 3,
+            "title": "Semester 3",
+            "subjects": [
+                {
+                    "code": "MCS-021",
+                    "name": "Data and File Structures",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Linear Data Structures",
+                            "units": [
+                                {"unit_number": 1, "title": "Introduction to Algorithms & Complexity", "topics": ["Time and space complexity", "Big O notation", "Algorithm analysis"]},
+                                {"unit_number": 2, "title": "Arrays, Stacks and Queues", "topics": ["Stack operations, infix to postfix", "Queue, circular queue, deque"]},
+                                {"unit_number": 3, "title": "Linked Lists", "topics": ["Singly, doubly, circular linked lists", "Dynamic memory operations"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Non-Linear Data Structures & Algorithms",
+                            "units": [
+                                {"unit_number": 1, "title": "Trees and Binary Search Trees", "topics": ["Binary trees, traversals", "BST operations", "AVL trees"]},
+                                {"unit_number": 2, "title": "Graphs and Traversal Algorithms", "topics": ["Adjacency matrix & list", "BFS and DFS", "Shortest path (Dijkstra)"]},
+                                {"unit_number": 3, "title": "Sorting and Searching Techniques", "topics": ["Bubble, insertion, quicksort, mergesort", "Binary search, hashing"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "MCS-023",
+                    "name": "Introduction to Database Management Systems",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Database Concepts and Data Modeling",
+                            "units": [
+                                {"unit_number": 1, "title": "Introduction to DBMS", "topics": ["3-tier architecture", "Data independence", "Database users and DBAs"]},
+                                {"unit_number": 2, "title": "Entity Relationship (ER) Modeling", "topics": ["Entities, attributes, relationships", "ER diagrams", "Extended ER concepts"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Relational Model, Normalization and SQL",
+                            "units": [
+                                {"unit_number": 1, "title": "Relational Data Model & Algebra", "topics": ["Tuples, relations, domains", "Relational algebra operations", "Integrity constraints"]},
+                                {"unit_number": 2, "title": "Functional Dependencies & Normalization", "topics": ["1NF, 2NF, 3NF, BCNF", "Lossless decomposition", "Dependency preservation"]},
+                                {"unit_number": 3, "title": "Structured Query Language (SQL)", "topics": ["DDL, DML, DCL", "Joins, subqueries, views", "Aggregate functions"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "MCS-014",
+                    "name": "Systems Analysis and Design",
+                    "type": "Theory",
+                    "credits": 3,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Systems Planning and Analysis",
+                            "units": [
+                                {"unit_number": 1, "title": "System Development Life Cycle", "topics": ["Waterfall, prototyping, spiral models", "Feasibility analysis"]},
+                                {"unit_number": 2, "title": "Structured Systems Analysis", "topics": ["Data Flow Diagrams (DFDs)", "Data dictionary", "Decision tables and trees"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "System Design, Testing and Implementation",
+                            "units": [
+                                {"unit_number": 1, "title": "System Design and UI Principles", "topics": ["Input and output design", "User interface design", "Database design"]},
+                                {"unit_number": 2, "title": "Testing, Quality Assurance and Maintenance", "topics": ["Unit, integration, system testing", "Verification & validation", "Maintenance types"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCS-031",
+                    "name": "Programming in C++",
+                    "type": "Theory",
+                    "credits": 3,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Object-Oriented Programming Fundamentals in C++",
+                            "units": [
+                                {"unit_number": 1, "title": "Principles of OOP", "topics": ["Encapsulation, abstraction, inheritance, polymorphism", "C++ structure"]},
+                                {"unit_number": 2, "title": "Classes, Objects and Constructors", "topics": ["Access specifiers", "Constructors and destructors", "this pointer"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Inheritance, Polymorphism and Advanced Features",
+                            "units": [
+                                {"unit_number": 1, "title": "Inheritance and Operator Overloading", "topics": ["Single, multiple, multilevel inheritance", "Operator overloading"]},
+                                {"unit_number": 2, "title": "Virtual Functions, Templates and Streams", "topics": ["Runtime polymorphism, virtual functions", "Function and class templates", "File I/O"]}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "semester_number": 4,
+            "title": "Semester 4",
+            "subjects": [
+                {
+                    "code": "BCS-040",
+                    "name": "Statistical Techniques",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Descriptive Statistics",
+                            "units": [
+                                {"unit_number": 1, "title": "Collection and Representation of Data", "topics": ["Frequency distributions", "Histograms, frequency polygons", "Ogives"]},
+                                {"unit_number": 2, "title": "Measures of Central Tendency and Dispersion", "topics": ["Mean, median, mode", "Variance, standard deviation, range", "Skewness and kurtosis"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Probability, Distributions and Estimation",
+                            "units": [
+                                {"unit_number": 1, "title": "Probability Theory and Random Variables", "topics": ["Axioms of probability", "Conditional probability, Bayes' theorem", "Random variables"]},
+                                {"unit_number": 2, "title": "Standard Probability Distributions", "topics": ["Binomial distribution", "Poisson distribution", "Normal distribution"]},
+                                {"unit_number": 3, "title": "Sampling and Hypothesis Testing", "topics": ["Sampling techniques", "Confidence intervals", "t-test, z-test, chi-square test"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "MCS-024",
+                    "name": "Object Oriented Technologies and Java Programming",
+                    "type": "Theory",
+                    "credits": 3,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Java Fundamentals and Core Concepts",
+                            "units": [
+                                {"unit_number": 1, "title": "Introduction to Java and JVM", "topics": ["Bytecode, JVM architecture", "Data types, operators, flow control"]},
+                                {"unit_number": 2, "title": "Classes, Inheritance and Packages", "topics": ["Class definitions, methods", "Inheritance, method overriding", "Packages and interfaces"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Exception Handling, Multithreading and GUI",
+                            "units": [
+                                {"unit_number": 1, "title": "Exception Handling and Multithreading", "topics": ["try-catch-finally", "Thread lifecycle, synchronization"]},
+                                {"unit_number": 2, "title": "Applets, AWT and Event Handling", "topics": ["AWT components, layout managers", "Event delegation model", "Swing basics"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCS-041",
+                    "name": "Fundamentals of Computer Networks",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Networking Concepts and Physical/Data Link Layers",
+                            "units": [
+                                {"unit_number": 1, "title": "Network Topologies and Reference Models", "topics": ["OSI vs TCP/IP models", "Transmission media", "Multiplexing"]},
+                                {"unit_number": 2, "title": "Data Link Layer and MAC Protocols", "topics": ["Framing, error detection (CRC)", "Flow control (Sliding Window)", "Ethernet, CSMA/CD"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Network, Transport and Application Layers",
+                            "units": [
+                                {"unit_number": 1, "title": "Network Layer and Routing", "topics": ["IPv4 and IPv6 addressing", "Subnetting and CIDR", "Routing algorithms (DVR, LSR)"]},
+                                {"unit_number": 2, "title": "Transport and Application Protocols", "topics": ["TCP vs UDP", "Congestion control", "DNS, HTTP, FTP, SMTP"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCS-042",
+                    "name": "Introduction to Algorithm Design",
+                    "type": "Theory",
+                    "credits": 2,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Algorithm Design Paradigms",
+                            "units": [
+                                {"unit_number": 1, "title": "Divide-and-Conquer and Recurrences", "topics": ["Binary search, mergesort, quicksort", "Master theorem", "Recurrence trees"]},
+                                {"unit_number": 2, "title": "Greedy Algorithms and Dynamic Programming", "topics": ["Fractional knapsack, Huffman coding", "0/1 Knapsack, matrix chain multiplication", "LCS"]}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "semester_number": 5,
+            "title": "Semester 5",
+            "subjects": [
+                {
+                    "code": "BCS-051",
+                    "name": "Introduction to Software Engineering",
+                    "type": "Theory",
+                    "credits": 3,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Software Engineering Methodologies",
+                            "units": [
+                                {"unit_number": 1, "title": "Software Process Models", "topics": ["Agile, Scrum, Waterfall, Spiral", "Software requirements specification (SRS)"]},
+                                {"unit_number": 2, "title": "Software Architecture and Design", "topics": ["Modular design, cohesion and coupling", "UML diagrams: use case, class, sequence"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Testing, Metrics and Project Management",
+                            "units": [
+                                {"unit_number": 1, "title": "Software Testing Strategies", "topics": ["Black-box and white-box testing", "Cyclomatic complexity", "Regression testing"]},
+                                {"unit_number": 2, "title": "Software Cost Estimation and Maintenance", "topics": ["COCOMO model", "Risk management", "Software maintenance models"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCS-052",
+                    "name": "Network Programming and Administration",
+                    "type": "Theory",
+                    "credits": 3,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Network Programming Fundamentals",
+                            "units": [
+                                {"unit_number": 1, "title": "TCP/IP Sockets and Client-Server Model", "topics": ["Socket API, byte ordering", "Iterative vs concurrent servers"]},
+                                {"unit_number": 2, "title": "Network Administration and Security", "topics": ["DNS and DHCP configuration", "Firewalls, NAT, VPN", "Network monitoring tools"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCS-053",
+                    "name": "Web Programming",
+                    "type": "Theory",
+                    "credits": 2,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Web Design and Development",
+                            "units": [
+                                {"unit_number": 1, "title": "HTML5, CSS3 and Responsive Design", "topics": ["Semantic HTML elements", "CSS layouts (Flexbox, Grid)", "Responsive media queries"]},
+                                {"unit_number": 2, "title": "JavaScript and Client-Side Scripting", "topics": ["DOM manipulation, event handling", "Asynchronous JavaScript (Promises, AJAX)"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCS-054",
+                    "name": "Computer Oriented Numerical Techniques",
+                    "type": "Theory",
+                    "credits": 3,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Numerical Analysis and Linear Systems",
+                            "units": [
+                                {"unit_number": 1, "title": "Roots of Non-Linear Equations", "topics": ["Bisection method", "Regula-Falsi method", "Newton-Raphson method"]},
+                                {"unit_number": 2, "title": "Linear Systems and Interpolation", "topics": ["Gauss elimination & Gauss-Seidel", "Lagrange & Newton interpolation", "Trapezoidal & Simpson's rules"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCS-055",
+                    "name": "Business Communication",
+                    "type": "Theory",
+                    "credits": 2,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Corporate Communication",
+                            "units": [
+                                {"unit_number": 1, "title": "Business Writing and Reporting", "topics": ["Formal business reports", "Executive summaries", "Project proposals"]},
+                                {"unit_number": 2, "title": "Presentation and Meeting Skills", "topics": ["Delivering presentations", "Meeting agendas and minutes", "Negotiation tactics"]}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "semester_number": 6,
+            "title": "Semester 6",
+            "subjects": [
+                {
+                    "code": "BCS-062",
+                    "name": "E-Commerce",
+                    "type": "Theory",
+                    "credits": 2,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Concepts and Infrastructure of E-Commerce",
+                            "units": [
+                                {"unit_number": 1, "title": "E-Commerce Business Models", "topics": ["B2B, B2C, C2C, G2C models", "Value chain and digital marketplaces"]},
+                                {"unit_number": 2, "title": "Electronic Payment Systems and Security", "topics": ["Credit/debit cards, net banking, UPI", "SSL/TLS, encryption, digital signatures", "Cyber laws & IT Act"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "MCS-022",
+                    "name": "Operating System Concepts and Networking Management",
+                    "type": "Theory",
+                    "credits": 4,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Operating System Fundamentals and Process Management",
+                            "units": [
+                                {"unit_number": 1, "title": "Process Management and Scheduling", "topics": ["Process states, PCBs", "Scheduling algorithms (FCFS, SJF, RR)", "Inter-process communication"]},
+                                {"unit_number": 2, "title": "Process Synchronization and Deadlocks", "topics": ["Critical section problem, semaphores", "Deadlock detection, prevention, and avoidance (Banker's)"]}
+                            ]
+                        },
+                        {
+                            "block_number": 2,
+                            "title": "Memory Management and File Systems",
+                            "units": [
+                                {"unit_number": 1, "title": "Memory Management and Virtual Memory", "topics": ["Paging and segmentation", "Page replacement algorithms (FIFO, LRU)", "Thrashing"]},
+                                {"unit_number": 2, "title": "File System and Security Management", "topics": ["File organization and access methods", "Directory structures", "Authentication and access control"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "BCSP-064",
+                    "name": "Project",
+                    "type": "Project",
+                    "credits": 8,
+                    "blocks": [
+                        {
+                            "block_number": 1,
+                            "title": "Project Lifecycle and Execution",
+                            "units": [
+                                {"unit_number": 1, "title": "Project Formulation, Design and Implementation", "topics": ["Problem definition & synopsis", "System design & coding", "Testing, deployment & viva preparation"]}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+inventory_path = Path("config/bca_syllabus_inventory.json")
+inventory_path.parent.mkdir(parents=True, exist_ok=True)
+inventory_path.write_text(json.dumps(bca_curriculum, indent=2), encoding="utf-8")
+
+storage_path = Path("storage/bca_syllabus_inventory.json")
+storage_path.parent.mkdir(parents=True, exist_ok=True)
+storage_path.write_text(json.dumps(bca_curriculum, indent=2), encoding="utf-8")
+
+# Count statistics
+total_subjects = sum(len(s["subjects"]) for s in bca_curriculum["semesters"])
+total_blocks = sum(sum(len(sub["blocks"]) for sub in s["subjects"]) for s in bca_curriculum["semesters"])
+total_units = sum(sum(sum(len(b["units"]) for b in sub["blocks"]) for sub in s["subjects"]) for s in bca_curriculum["semesters"])
+
+print("✓ Machine-readable syllabus inventory generated successfully!")
+print(f"  Total Semesters: {len(bca_curriculum['semesters'])}")
+print(f"  Total Subjects:  {total_subjects}")
+print(f"  Total Blocks:    {total_blocks}")
+print(f"  Total Units:     {total_units}")
+print(f"  Saved to:        {inventory_path} and {storage_path}")

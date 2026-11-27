@@ -1,0 +1,58 @@
+<div class="note-chapter">
+  <span class="chapter-badge ng-tag">SYSTEM PERFORMANCE ANALYSIS</span>
+  <h1 class="chapter-title">Page 3: Memory Hierarchy and Cache Performance</h1>
+  
+  
+  <p class="ng-intro">An analytical study of the computer memory hierarchy, resolving trade-offs across speed, capacity, and cost per bit, driven by the Principle of Locality and Average Memory Access Time models.</p>
+  
+
+  
+  <div class="note-section mb-6">
+    <h2>1.2 Memory Hierarchy Design and Principle of Locality</h2>
+    
+    <p>Modern computer architectures implement a hierarchical memory model to balance speed, storage capacity, and cost per bit. High-speed, high-cost storage technologies are placed nearest to the processor, backed by larger, slower, and more economical tiers.</p>
+
+    
+    <ul class="my-3">
+      
+      <li>Processor Registers: Access latency ~0.5 - 1 ns, capacity &lt; 2 KB, highest manufacturing cost per bit.</li>
+      
+      <li>Primary Cache (L1, L2, L3): SRAM placed adjacent to the processor core, operating at access latencies of ~1 - 10 ns.</li>
+      
+      <li>Main Memory (RAM): Dynamic RAM (DRAM) offering moderate access latencies of ~50 - 100 ns with gigabyte capacities.</li>
+      
+      <li>Secondary Storage: Magnetic hard disk drives (HDD) and solid-state drives (SSD) offering non-volatile retention with millisecond and microsecond latencies.</li>
+      
+    </ul>
+    
+
+    
+      
+      <div class="callout ng-card my-4 font-mono bg-neutral-50 p-4 border border-neutral-200 rounded-lg">
+        <strong class="text-orange-600 block mb-1">Average Memory Access Time (AMAT)</strong>
+        <code>AMAT = Hit Time + (Miss Rate * Miss Penalty)</code>
+      </div>
+      
+    
+      
+      <div class="callout callout-info ng-highlight my-4">
+        <strong>Principle of Locality:</strong> The empirical operational property governing memory access patterns, divided into: (1) Temporal Locality: If a memory location is referenced once, it will likely be referenced again soon (e.g., loop control variables); (2) Spatial Locality: If a location is referenced, adjacent memory addresses will likely be referenced in the near future (e.g., consecutive array traversal).
+      </div>
+      
+    
+      
+      <div class="callout ng-card my-4">
+        <strong>Locality Application Examples:</strong> Loop index variables exemplify Temporal Locality by being iteratively read and updated in rapid succession. Linear array processing exemplifies Spatial Locality by referencing contiguous memory cells sequentially.
+      </div>
+      
+    
+  </div>
+  
+
+  
+  <div class="callout callout-info ng-highlight mt-6 border-l-4 border-orange-500 bg-orange-50/60 p-4 rounded-r-lg">
+    <strong class="text-orange-900 block mb-1">[IMP EXAM SUMMARY]</strong>
+    <p class="text-sm text-neutral-800 m-0">Be prepared to explain the latency and capacity progression across memory levels, derive or apply the AMAT formula, and define Temporal vs. Spatial Locality with examples.</p>
+  </div>
+  
+</div>

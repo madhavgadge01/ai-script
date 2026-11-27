@@ -1,0 +1,58 @@
+<div class="note-chapter">
+  <span class="chapter-badge ng-tag">CORE PROCESSOR MECHANICS</span>
+  <h1 class="chapter-title">Page 2: Central Processing Unit Architecture and Registers</h1>
+  
+  
+  <p class="ng-intro">Detailed examination of the Central Processing Unit, focusing on the Arithmetic Logic Unit, the Control Unit, operational registers, and mathematical modeling of CPU execution time.</p>
+  
+
+  
+  <div class="note-section mb-6">
+    <h2>1.1 CPU Components and Internal Register Organization</h2>
+    
+    <p>The CPU serves as the primary computational engine of the computer system. It coordinates operations through the Control Unit and carries out mathematical and boolean transformations via the Arithmetic and Logic Unit, supported by dedicated high-speed internal registers.</p>
+
+    
+    <ul class="my-3">
+      
+      <li>Arithmetic and Logic Unit (ALU): Executes fundamental arithmetic operations (addition, subtraction, multiplication, division) and boolean logic operations (AND, OR, NOT, bit-shift comparisons).</li>
+      
+      <li>Control Unit (CU): Acts as the operational supervisor, generating clock-synchronized timing and control signals to govern instruction fetching, register transfers, and bus interactions.</li>
+      
+      <li>Program Counter (PC): Holds the memory address of the subsequent instruction to be fetched.</li>
+      
+      <li>Instruction Register (IR): Holds the operational code (opcode) of the currently executing instruction.</li>
+      
+      <li>Memory Address Register (MAR): Holds the physical memory address referenced during read and write cycles.</li>
+      
+      <li>Memory Buffer Register (MBR): Holds the actual data word read from or written to main memory.</li>
+      
+      <li>Accumulator (AC): Preserves intermediate computational operands and results.</li>
+      
+    </ul>
+    
+
+    
+      
+      <div class="callout ng-card my-4 font-mono bg-neutral-50 p-4 border border-neutral-200 rounded-lg">
+        <strong class="text-orange-600 block mb-1">CPU Execution Time</strong>
+        <code>CPU Time = Instruction Count * Cycles Per Instruction (CPI) * Clock Cycle Time</code>
+      </div>
+      
+    
+      
+      <div class="callout callout-warning ng-highlight my-4 border-l-4 border-amber-500 bg-amber-50">
+        <strong class="text-amber-800">[IMP] [IMP] Role of Dedicated CPU Registers:</strong> Registers provide ultra-fast temporary storage inside the processor core. Crucial for term-end exams: PC holds the address of the next instruction; IR stores the opcode under execution; MAR holds the physical address during memory transactions; MBR buffers read/write data words; AC retains intermediate operands.
+      </div>
+      
+    
+  </div>
+  
+
+  
+  <div class="callout callout-info ng-highlight mt-6 border-l-4 border-orange-500 bg-orange-50/60 p-4 rounded-r-lg">
+    <strong class="text-orange-900 block mb-1">[IMP EXAM SUMMARY]</strong>
+    <p class="text-sm text-neutral-800 m-0">Master the explicit operational duties of the CU and ALU, the functional roles of PC, IR, MAR, MBR, AC registers, and the CPU execution time performance formula.</p>
+  </div>
+  
+</div>

@@ -1,0 +1,80 @@
+<div class="note-chapter">
+  <span class="chapter-badge ng-tag">{{ page.category_badge }}</span>
+  <h1 class="chapter-title">{{ page.page_title }}</h1>
+  
+  {% if page.intro_paragraph %}
+  <p class="ng-intro">{{ page.intro_paragraph }}</p>
+  {% endif %}
+
+  {% for section in page.sections %}
+  <div class="note-section mb-6">
+    <h2>{{ section.heading }}</h2>
+    
+    <p>{{ section.explanation }}</p>
+
+    {% if section.table and section.table.headers and section.table.rows %}
+    <div class="table-container my-4 overflow-x-auto">
+      <table class="prose-academic w-full border-collapse my-3">
+        {% if section.table.caption %}
+        <caption class="text-xs font-semibold text-neutral-500 mb-1 text-left">{{ section.table.caption }}</caption>
+        {% endif %}
+        <thead>
+          <tr>
+            {% for header in section.table.headers %}
+            <th class="border-b-2 border-orange-200 bg-orange-50/70 text-orange-950 font-bold px-3 py-2 text-left text-sm">{{ header }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in section.table.rows %}
+          <tr class="hover:bg-orange-50/30 border-b border-neutral-200">
+            {% for cell in row %}
+            <td class="px-3 py-2 text-sm text-neutral-800">{{ cell }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if section.bullet_points %}
+    <ul class="my-3">
+      {% for bp in section.bullet_points %}
+      <li>{{ bp }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% for callout in section.callouts %}
+      {% if callout.callout_type == 'definition' %}
+      <div class="callout callout-info ng-highlight my-4">
+        <strong>{{ callout.title }}:</strong> {{ callout.content }}
+      </div>
+      {% elif callout.callout_type == 'formula' %}
+      <div class="callout ng-card my-4 font-mono bg-neutral-50 p-4 border border-neutral-200 rounded-lg">
+        <strong class="text-orange-600 block mb-1">{{ callout.title }}</strong>
+        <code>{{ callout.content }}</code>
+      </div>
+      {% elif callout.callout_type == 'imp_exam_point' %}
+      <div class="callout callout-warning ng-highlight my-4 border-l-4 border-amber-500 bg-amber-50">
+        <strong class="text-amber-800">
+          {% if not callout.title.strip().startswith('[IMP]') %}[IMP] {% endif %}{{ callout.title }}:
+        </strong> {{ callout.content }}
+      </div>
+      {% else %}
+      <div class="callout ng-card my-4">
+        <strong>{{ callout.title }}:</strong> {{ callout.content }}
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  {% if page.exam_summary %}
+  <div class="callout callout-info ng-highlight mt-6 border-l-4 border-orange-500 bg-orange-50/60 p-4 rounded-r-lg">
+    <strong class="text-orange-900 block mb-1">[IMP EXAM SUMMARY]</strong>
+    <p class="text-sm text-neutral-800 m-0">{{ page.exam_summary }}</p>
+  </div>
+  {% endif %}
+</div>
